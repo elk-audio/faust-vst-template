@@ -27,7 +27,7 @@ The other options available, i.e. those starting with `FAUST_*`, are the relevan
 
 ---
 Elk Audio OS
-Copyright (C) 2019 Elk
+Copyright (C) 2019 Modern Ancient Instruments Networked AB, dba Elk
 Stockholm
 
 ---
