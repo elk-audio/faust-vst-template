@@ -11,7 +11,7 @@ set(VST2_SDK_PATH "${PROJECT_SOURCE_DIR}/vstsdk2.4" CACHE STRING "Location of VS
 # options adapted from faust2faustvst script
 option(FAUST_META "Include Faust metadata in generated plugin" ON)
 option(FAUST_MIDICC "Enable direct mapping of MIDI CCs in the plugin" OFF)
-option(FAUST_NVOICES "Number of synth voices (instruments only)" 8)
+set(FAUST_NVOICES 8 CACHE STRING "Number of synth voices (instruments only)")
 
 ##################
 #  VsT SDK       #
@@ -50,7 +50,7 @@ function (add_vst2_plugin_target target source)
     if(${FAUST_MIDICC})
         target_compile_definitions(${target} PRIVATE -DFAUST_MIDICC=1)
     endif()
-    target_compile_definitions(${target} PRIVATE -DFAUST_NVOICES=${FAUST_NVOICES})
+    target_compile_definitions(${target} PRIVATE -DNVOICES=${FAUST_NVOICES})
     set_target_properties(${target} PROPERTIES
         # Remove leading 'lib' from generated .so file
         PREFIX ""
