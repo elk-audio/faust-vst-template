@@ -65,8 +65,11 @@ function (build_faust_target faust_source)
     get_filename_component(faust_basename ${faust_source} NAME_WE)
     set(FAUST_CPP_OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${faust_basename}_gen.cpp")
     message("${FAUST_CPP_OUTPUT}")
-    execute_process(
+
+    add_custom_command(
+        OUTPUT  ${FAUST_CPP_OUTPUT}
         COMMAND faust -i -a faustvst.cpp -o ${FAUST_CPP_OUTPUT} ${faust_source}
+        DEPENDS ${faust_source}
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     )
     add_vst2_plugin_target(${faust_basename} ${FAUST_CPP_OUTPUT})
