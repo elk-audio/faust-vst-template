@@ -40,7 +40,7 @@ function (add_vst2_plugin_target target source)
         "${VST2_SDK_PLUGIN_SOURCES}"
     )
     add_library(${target} MODULE ${TARGET_SOURCES})
-    target_include_directories(${target} PRIVATE ${VST_INCLUDE_DIRS})
+    target_include_directories(${target} PRIVATE ${VST_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR})
     target_compile_features(${target} PRIVATE cxx_std_17)
     target_compile_options(${target} PRIVATE -Wno-unused -Wno-multichar -Wno-write-strings -Wno-narrowing)
     target_compile_options(${target} PRIVATE -ffast-math -ftree-vectorize)
@@ -70,7 +70,7 @@ function (build_faust_target faust_source)
         OUTPUT  ${FAUST_CPP_OUTPUT}
         COMMAND faust -i -a faustvst.cpp -o ${FAUST_CPP_OUTPUT} ${faust_source}
         DEPENDS ${faust_source}
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        WORKING_DIRECTORY ${FAUST_SOURCES_DIR}
     )
     add_vst2_plugin_target(${faust_basename} ${FAUST_CPP_OUTPUT})
 endfunction()
